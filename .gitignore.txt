@@ -1,0 +1,8 @@
+# Pastas de build
+bin/
+obj/
+
+# Configurações locais do VS
+*.user
+*.suo
+*.vs/

@@ -1,0 +1,22 @@
+﻿@model Restaurante.Web.Data.Ingrediente
+
+@{
+    ViewData["Title"] = "Detalhes do Ingrediente";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">@Model.Nome</h4>
+        <dl class="row">
+            <dt class="col-sm-2">Id</dt>
+            <dd class="col-sm-10">@Model.Id</dd>
+
+            <dt class="col-sm-2">Nome</dt>
+            <dd class="col-sm-10">@Model.Nome</dd>
+
+        </dl>
+        <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+    </div>
+</div>
