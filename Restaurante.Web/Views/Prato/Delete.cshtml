@@ -1,0 +1,45 @@
+﻿@model Restaurante.Web.Data.Prato
+
+@{
+    ViewData["Title"] = "Deletar Prato";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Tem certeza que deseja deletar este prato?</h4>
+<div class="card mt-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-2">Id</dt>
+            <dd class="col-sm-10">@Model.Id</dd>
+
+            <dt class="col-sm-2">Nome</dt>
+            <dd class="col-sm-10">@Model.Nome</dd>
+
+            <dt class="col-sm-2">Descrição</dt>
+            <dd class="col-sm-10">@Model.Descricao</dd>
+
+            <dt class="col-sm-2">Ingredientes</dt>
+            <dd class="col-sm-10">
+                @if (Model.Ingredientes != null && Model.Ingredientes.Any())
+                {
+                    <ul>
+                        @foreach (var ingrediente in Model.Ingredientes)
+                        {
+                            <li>@ingrediente.Nome</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <span>Nenhum ingrediente cadastrado.</span>
+                }
+            </dd>
+        </dl>
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Deletar</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>

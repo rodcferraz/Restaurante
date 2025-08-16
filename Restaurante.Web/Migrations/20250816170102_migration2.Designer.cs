@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaurante.Web.Data;
 
@@ -10,27 +11,14 @@ using Restaurante.Web.Data;
 namespace Restaurante.Web.Migrations
 {
     [DbContext(typeof(RestauranteDbContext))]
-    partial class RestauranteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250816170102_migration2")]
+    partial class migration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.8");
-
-            modelBuilder.Entity("IngredientePrato", b =>
-                {
-                    b.Property<Guid>("IngredientesId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("PratosId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("IngredientesId", "PratosId");
-
-                    b.HasIndex("PratosId");
-
-                    b.ToTable("IngredientePrato");
-                });
 
             modelBuilder.Entity("Restaurante.Web.Data.Ingrediente", b =>
                 {
@@ -45,10 +33,15 @@ namespace Restaurante.Web.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("PratoId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Nome")
                         .IsUnique();
+
+                    b.HasIndex("PratoId");
 
                     b.ToTable("Ingredientes");
                 });
@@ -75,19 +68,16 @@ namespace Restaurante.Web.Migrations
                     b.ToTable("Pratos");
                 });
 
-            modelBuilder.Entity("IngredientePrato", b =>
+            modelBuilder.Entity("Restaurante.Web.Data.Ingrediente", b =>
                 {
-                    b.HasOne("Restaurante.Web.Data.Ingrediente", null)
-                        .WithMany()
-                        .HasForeignKey("IngredientesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Restaurante.Web.Data.Prato", null)
-                        .WithMany()
-                        .HasForeignKey("PratosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Ingredientes")
+                        .HasForeignKey("PratoId");
+                });
+
+            modelBuilder.Entity("Restaurante.Web.Data.Prato", b =>
+                {
+                    b.Navigation("Ingredientes");
                 });
 #pragma warning restore 612, 618
         }

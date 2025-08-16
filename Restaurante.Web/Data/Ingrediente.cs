@@ -11,6 +11,8 @@ namespace Restaurante.Web.Data
         [Required]
         public string Nome { get; set; }
 
+        public ICollection<Prato> Pratos { get; set; } = new List<Prato>();
+
         public bool Ativo { get; set; } = true;
     }
 }

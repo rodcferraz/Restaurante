@@ -5,12 +5,12 @@ namespace Restaurante.Web.Data
     public class Prato
     {
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
         public string Nome { get; set; }
         [Required]
         public string Descricao { get; set; }
-        public List<Ingrediente> Ingredientes { get; set; }
+        public ICollection<Ingrediente> Ingredientes { get; set; } = new List<Ingrediente>();
         public bool Ativo { get; set; } = true;
     }
 }

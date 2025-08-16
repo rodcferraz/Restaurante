@@ -7,6 +7,7 @@ namespace Restaurante.Web.Data
         public RestauranteDbContext(DbContextOptions<RestauranteDbContext> options) : base(options) { }
 
         public DbSet<Ingrediente> Ingredientes => Set<Ingrediente>();
+        public DbSet<Prato> Pratos => Set<Prato>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

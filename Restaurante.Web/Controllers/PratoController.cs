@@ -1,34 +1,85 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Restaurante.Web.Data;
+using Restaurante.Web.Models;
 
 namespace Restaurante.Web.Controllers
 {
     public class PratoController : Controller
     {
+        private readonly RestauranteDbContext _context;
+
+        public PratoController(RestauranteDbContext context)
+        {
+            _context = context;
+        }
+
         // GET: PratoController
         public ActionResult Index()
         {
-            return View();
+            return View(_context.Pratos.Where(x => x.Ativo).ToList());
         }
 
         // GET: PratoController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            var pratos = _context.Pratos.FirstOrDefault(i => i.Id.Equals(id));
+
+            ViewBag.Ingredientes = pratos.Ingredientes;
+
+            return View(pratos);
         }
 
         // GET: PratoController/Create
         public ActionResult Create()
         {
+            var ingredientes = _context.Ingredientes.Where(x => x.Ativo);
+
+            ViewBag.Ingredientes = ingredientes.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Nome }).ToList();
+
             return View();
         }
 
         // POST: PratoController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(PratoViewModel pratoViewModel)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(pratoViewModel);
+                }
+
+                var pratoExistente = _context.Pratos.
+                    FirstOrDefault(x =>
+                        x.Nome.Equals(pratoViewModel.Nome) &&
+                        x.Ativo);
+
+                var ingredientes = _context.Ingredientes
+                    .Where(x => pratoViewModel.Ingredientes.Contains(x.Id))
+                    .ToList();
+
+                if (pratoExistente != null)
+                {
+                    ModelState.AddModelError("Nome", "Já existe um prato com esse nome.");
+                    return View(pratoViewModel);
+                }
+
+
+
+                var prato = new Prato
+                {
+                    Id = Guid.NewGuid(),
+                    Nome = pratoViewModel.Nome,
+                    Descricao = pratoViewModel.Descricao,
+                    Ingredientes = ingredientes,
+                    Ativo = true
+                };
+
+                _context.Pratos.Add(prato);
+
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -38,18 +89,51 @@ namespace Restaurante.Web.Controllers
         }
 
         // GET: PratoController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var prato = _context.Pratos.FirstOrDefault(i => i.Id.Equals(id));
+
+            ViewBag.Ingredientes = _context.Ingredientes
+                .Where(x => x.Ativo)
+                .Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Nome })
+                .ToList();
+
+            return View(prato);
         }
 
         // POST: PratoController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(PratoViewModel pratoViewModel)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(pratoViewModel);
+                }
+
+                var pratoExistente = _context.Pratos.
+                    FirstOrDefault(x =>
+                        x.Nome.Equals(pratoViewModel.Nome) &&
+                        x.Ativo);
+
+                if (pratoViewModel != null)
+                {
+                    ModelState.AddModelError("Nome", "Já existe um ingrediente com esse nome.");
+                    return View(pratoViewModel);
+                }
+
+                var ingredientes = _context.Ingredientes
+                    .Where(x => pratoViewModel.Ingredientes.Contains(x.Id))
+                    .ToList();
+
+                pratoExistente.Nome = pratoViewModel.Nome;
+                pratoExistente.Descricao = pratoViewModel.Descricao;    
+                pratoExistente.Ingredientes = ingredientes;
+
+                _context.Pratos.Update(pratoExistente);
+
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -59,18 +143,31 @@ namespace Restaurante.Web.Controllers
         }
 
         // GET: PratoController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            var prato = _context.Pratos.
+                    FirstOrDefault(x =>
+                        x.Id.Equals(id));
+            return View(prato);
         }
 
         // POST: PratoController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [ActionName("Delete")]
+        public ActionResult DeletePrato(Guid id)
         {
             try
             {
+                var pratoExistente = _context.Pratos.
+                   FirstOrDefault(x =>
+                       x.Id.Equals(id) &&
+                       x.Ativo);
+
+                pratoExistente.Ativo = false;
+
+                _context.Update(pratoExistente);
+
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
