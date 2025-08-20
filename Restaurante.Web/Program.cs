@@ -10,7 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<RestauranteDbContext>(option =>
 {
     var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-    var dbPath = Path.Combine(localAppData, "Restaurante.db");
+    var dbPath = Path.Combine(localAppData, "Restaurante2.db");
 
 
     option.UseSqlite($"Data Source={dbPath}")
