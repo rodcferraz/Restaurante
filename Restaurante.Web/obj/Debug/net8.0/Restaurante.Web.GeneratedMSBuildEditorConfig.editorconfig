@@ -17,73 +17,73 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Restaurante.Web
 build_property.RootNamespace = Restaurante.Web
-build_property.ProjectDir = C:\Users\rodri\OneDrive\Documentos\Caixaverso\Projetos Aulas\Restaurante\Restaurante.Web\
+build_property.ProjectDir = C:\Users\paulo\Source\Repos\Restaurante\Restaurante.Web\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\rodri\OneDrive\Documentos\Caixaverso\Projetos Aulas\Restaurante\Restaurante.Web
+build_property.MSBuildProjectDirectory = C:\Users\paulo\Source\Repos\Restaurante\Restaurante.Web
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Ingrediente/Create.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Ingrediente/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5ncmVkaWVudGVcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Ingrediente/Delete.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Ingrediente/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5ncmVkaWVudGVcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Ingrediente/Details.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Ingrediente/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5ncmVkaWVudGVcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Ingrediente/Edit.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Ingrediente/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5ncmVkaWVudGVcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Ingrediente/Index.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Ingrediente/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5ncmVkaWVudGVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Prato/Create.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Prato/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJhdG9cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Prato/Delete.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Prato/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJhdG9cRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Prato/Details.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Prato/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJhdG9cRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Prato/Edit.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Prato/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJhdG9cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Prato/Index.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Prato/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJhdG9cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Shared/Error.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/_ViewImports.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/_ViewStart.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rodri/OneDrive/Documentos/Caixaverso/Projetos Aulas/Restaurante/Restaurante.Web/Views/Shared/_Layout.cshtml]
+[C:/Users/paulo/Source/Repos/Restaurante/Restaurante.Web/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-rv9w3ii6k6

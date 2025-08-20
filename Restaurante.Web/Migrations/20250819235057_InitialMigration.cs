@@ -6,22 +6,37 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Restaurante.Web.Migrations
 {
     /// <inheritdoc />
-    public partial class migration3 : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Ingredientes_Pratos_PratoId",
-                table: "Ingredientes");
+            migrationBuilder.CreateTable(
+                name: "Ingredientes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    Ativo = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ingredientes", x => x.Id);
+                });
 
-            migrationBuilder.DropIndex(
-                name: "IX_Ingredientes_PratoId",
-                table: "Ingredientes");
-
-            migrationBuilder.DropColumn(
-                name: "PratoId",
-                table: "Ingredientes");
+            migrationBuilder.CreateTable(
+                name: "Pratos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    Descricao = table.Column<string>(type: "TEXT", nullable: false),
+                    Ativo = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pratos", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "IngredientePrato",
@@ -51,6 +66,12 @@ namespace Restaurante.Web.Migrations
                 name: "IX_IngredientePrato_PratosId",
                 table: "IngredientePrato",
                 column: "PratosId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ingredientes_Nome",
+                table: "Ingredientes",
+                column: "Nome",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -59,23 +80,11 @@ namespace Restaurante.Web.Migrations
             migrationBuilder.DropTable(
                 name: "IngredientePrato");
 
-            migrationBuilder.AddColumn<Guid>(
-                name: "PratoId",
-                table: "Ingredientes",
-                type: "TEXT",
-                nullable: true);
+            migrationBuilder.DropTable(
+                name: "Ingredientes");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Ingredientes_PratoId",
-                table: "Ingredientes",
-                column: "PratoId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Ingredientes_Pratos_PratoId",
-                table: "Ingredientes",
-                column: "PratoId",
-                principalTable: "Pratos",
-                principalColumn: "Id");
+            migrationBuilder.DropTable(
+                name: "Pratos");
         }
     }
 }

@@ -11,14 +11,29 @@ using Restaurante.Web.Data;
 namespace Restaurante.Web.Migrations
 {
     [DbContext(typeof(RestauranteDbContext))]
-    [Migration("20250816122610_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250819235057_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.8");
+
+            modelBuilder.Entity("IngredientePrato", b =>
+                {
+                    b.Property<Guid>("IngredientesId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("PratosId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("IngredientesId", "PratosId");
+
+                    b.HasIndex("PratosId");
+
+                    b.ToTable("IngredientePrato");
+                });
 
             modelBuilder.Entity("Restaurante.Web.Data.Ingrediente", b =>
                 {
@@ -33,24 +48,19 @@ namespace Restaurante.Web.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ReceitaId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Nome")
                         .IsUnique();
-
-                    b.HasIndex("ReceitaId");
 
                     b.ToTable("Ingredientes");
                 });
 
             modelBuilder.Entity("Restaurante.Web.Data.Prato", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("INTEGER");
@@ -65,23 +75,22 @@ namespace Restaurante.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Prato");
+                    b.ToTable("Pratos");
                 });
 
-            modelBuilder.Entity("Restaurante.Web.Data.Ingrediente", b =>
+            modelBuilder.Entity("IngredientePrato", b =>
                 {
-                    b.HasOne("Restaurante.Web.Data.Prato", "Receita")
-                        .WithMany("Ingredientes")
-                        .HasForeignKey("ReceitaId")
+                    b.HasOne("Restaurante.Web.Data.Ingrediente", null)
+                        .WithMany()
+                        .HasForeignKey("IngredientesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Receita");
-                });
-
-            modelBuilder.Entity("Restaurante.Web.Data.Prato", b =>
-                {
-                    b.Navigation("Ingredientes");
+                    b.HasOne("Restaurante.Web.Data.Prato", null)
+                        .WithMany()
+                        .HasForeignKey("PratosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Restaurante.Web.Data;
 using Restaurante.Web.Models;
 
@@ -23,7 +24,9 @@ namespace Restaurante.Web.Controllers
         // GET: PratoController/Details/5
         public ActionResult Details(Guid id)
         {
-            var pratos = _context.Pratos.FirstOrDefault(i => i.Id.Equals(id));
+            var pratos = _context.Pratos
+                .Include(x => x.Ingredientes)
+                .FirstOrDefault(i => i.Id.Equals(id));
 
             ViewBag.Ingredientes = pratos.Ingredientes;
 
@@ -34,7 +37,6 @@ namespace Restaurante.Web.Controllers
         public ActionResult Create()
         {
             var ingredientes = _context.Ingredientes.Where(x => x.Ativo);
-
             ViewBag.Ingredientes = ingredientes.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Nome }).ToList();
 
             return View();
@@ -57,6 +59,7 @@ namespace Restaurante.Web.Controllers
                         x.Ativo);
 
                 var ingredientes = _context.Ingredientes
+                    //.Include(x => x.Pratos)
                     .Where(x => pratoViewModel.Ingredientes.Contains(x.Id))
                     .ToList();
 
@@ -65,8 +68,6 @@ namespace Restaurante.Web.Controllers
                     ModelState.AddModelError("Nome", "Já existe um prato com esse nome.");
                     return View(pratoViewModel);
                 }
-
-
 
                 var prato = new Prato
                 {
@@ -77,10 +78,11 @@ namespace Restaurante.Web.Controllers
                     Ativo = true
                 };
 
-                _context.Pratos.Add(prato);
+                //ingredientes.ForEach(x => x.Pratos.Add(prato));
 
+                _context.Pratos.Add(prato);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = prato.Id });
             }
             catch
             {
@@ -98,7 +100,15 @@ namespace Restaurante.Web.Controllers
                 .Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Nome })
                 .ToList();
 
-            return View(prato);
+            var model = new PratoViewModel
+            {
+                Id = id,
+                Nome = prato.Nome,
+                Descricao = prato.Descricao,
+                Ingredientes = _context.Ingredientes.Select(x => x.Id).ToList()
+            };
+
+            return View(model);
         }
 
         // POST: PratoController/Edit/5
@@ -112,26 +122,28 @@ namespace Restaurante.Web.Controllers
                     return View(pratoViewModel);
                 }
 
-                var pratoExistente = _context.Pratos.
-                    FirstOrDefault(x =>
+                var pratoExistente = _context.Pratos.Any(x =>
                         x.Nome.Equals(pratoViewModel.Nome) &&
+                        x.Id != pratoViewModel.Id &&
                         x.Ativo);
 
-                if (pratoViewModel != null)
+                if (pratoExistente)
                 {
                     ModelState.AddModelError("Nome", "Já existe um ingrediente com esse nome.");
                     return View(pratoViewModel);
                 }
 
+                var prato = _context.Pratos.Include(x => x.Ingredientes).FirstOrDefault(x => x.Id == pratoViewModel.Id);
+
                 var ingredientes = _context.Ingredientes
                     .Where(x => pratoViewModel.Ingredientes.Contains(x.Id))
                     .ToList();
 
-                pratoExistente.Nome = pratoViewModel.Nome;
-                pratoExistente.Descricao = pratoViewModel.Descricao;    
-                pratoExistente.Ingredientes = ingredientes;
+                prato.Nome = pratoViewModel.Nome;
+                prato.Descricao = pratoViewModel.Descricao;
+                prato.Ingredientes = ingredientes;
 
-                _context.Pratos.Update(pratoExistente);
+                _context.Pratos.Update(prato);
 
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
